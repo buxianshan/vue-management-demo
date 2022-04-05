@@ -14,6 +14,9 @@ import {
     Dropdown,
     DropdownMenu,
     DropdownItem,
+    Row,
+    Card,
+    Col,
 } from 'element-ui'
 import router from '../router'
 import './assets/less/index.less'
@@ -33,6 +36,9 @@ Vue.use(MenuItemGroup)
 Vue.use(Dropdown)
 Vue.use(DropdownMenu)
 Vue.use(DropdownItem)
+Vue.use(Row)
+Vue.use(Card)
+Vue.use(Col)
 
 new Vue({
     store,

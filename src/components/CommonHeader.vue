@@ -23,12 +23,11 @@ export default {
   name: 'CommonHeader',
   data() {
     return {
-      userIcon: require('../assets/wufan.png')
+      userIcon: require('../assets/images/user.png')
     }
   },
   methods: {
     handleMenu() {
-      console.log("ccccc")
       this.$store.commit('collapseMenu')
     }
   }
