@@ -35,7 +35,7 @@
       </el-card>
       <div class="graph">
         <el-card style="height: 260px">
-
+          <div style="height: 240px" ref="userEcharts"></div>
         </el-card>
         <el-card style="height: 260px">
 
@@ -167,6 +167,62 @@ export default {
         // 绘制折线图
         const E = echarts.init(this.$refs.echarts)
         E.setOption(option)
+
+        // 柱状图
+        const userOption = {
+          legend: {
+            // 图例文字颜色
+            textStyle: {
+              color: "#333",
+            },
+          },
+          grid: {
+            left: "20%",
+          },
+          // 提示框
+          tooltip: {
+            trigger: "axis",
+          },
+          xAxis: {
+            type: "category", // 类目轴
+            data: data.userData.map(item => item.date),
+            axisLine: {
+              lineStyle: {
+                color: "#17b3a3",
+              },
+            },
+            axisLabel: {
+              interval: 0,
+              color: "#333",
+            },
+          },
+          yAxis: [
+            {
+              type: "value",
+              axisLine: {
+                lineStyle: {
+                  color: "#17b3a3",
+                },
+              },
+            },
+          ],
+          color: ["#2ec7c9", "#b6a2de"],
+          series: [
+            {
+              name: '新增用户',
+              data: data.userData.map(item => item.new),
+              type: 'bar'
+            },
+            {
+              name: '活跃用户',
+              data: data.userData.map(item => item.active),
+              type: 'bar'
+              // bar 表示柱状图
+            }
+          ],
+        }
+        const U = echarts.init(this.$refs.userEcharts)
+        U.setOption(userOption)
 
       } else {
       }
