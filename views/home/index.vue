@@ -31,14 +31,17 @@
         </el-card>
       </div>
       <el-card style="height: 280px">
-        <div style="height: 280px" ref="echarts"></div>
+        <!--<div style="height: 280px" ref="echarts"></div>-->
+        <echarts :chart-data="echartData.order" style="height: 280px"></echarts>
       </el-card>
       <div class="graph">
         <el-card style="height: 260px">
-          <div style="height: 240px" ref="userEcharts"></div>
+          <!--<div style="height: 240px" ref="userEcharts"></div>-->
+          <echarts :chart-data="echartData.user" style="height: 240px"></echarts>
         </el-card>
         <el-card style="height: 260px">
-          <div style="height: 240px" ref="videoEcharts"></div>
+          <!--<div style="height: 240px" ref="videoEcharts"></div>-->
+          <echarts :chart-data="echartData.video" :is-axis-chart="false" style="height: 240px"></echarts>
         </el-card>
       </div>
     </el-col>
@@ -47,10 +50,14 @@
 
 <script>
 import {getData} from "../../api/data"
-import * as echarts from 'echarts'
+// import * as echarts from 'echarts'
+import Echarts from '../../src/components/ECharts'
 
 export default {
   name: 'Home',
+  components: {
+    Echarts
+  },
   data() {
     return {
       userIcon: require('../../src/assets/images/user.png'),
@@ -137,6 +144,19 @@ export default {
           color: "#5ab1ef",
         },
       ],
+      echartData: {
+        order: {
+          xData: [],
+          series: [],
+        },
+        user: {
+          xData: [],
+          series: [],
+        },
+        video: {
+          series: [],
+        },
+      }
     }
   },
   mounted() {
@@ -154,99 +174,122 @@ export default {
             type: 'line'
           })
         })
-        const option = {
-          xAxis: {
-            data: order.date
-          },
-          yAxis: {},
-          legend: {
-            data: keyArray
-          },
-          series
-        }
-        // 绘制折线图
-        const E = echarts.init(this.$refs.echarts)
-        E.setOption(option)
+        this.echartData.order.xData = order.date
+        this.echartData.order.series = series
+        // 把ECharts封装成了Vue组件之后，下面这些就不用写了
+        // const option = {
+        //   xAxis: {
+        //     data: order.date
+        //   },
+        //   yAxis: {},
+        //   legend: {
+        //     data: keyArray
+        //   },
+        //   series
+        // }
+        // // 绘制折线图
+        // const E = echarts.init(this.$refs.echarts)
+        // E.setOption(option)
 
-        // 柱状图
-        const userOption = {
-          legend: {
-            // 图例文字颜色
-            textStyle: {
-              color: "#333",
-            },
+        this.echartData.user.xData = data.userData.map(item => item.date)
+        this.echartData.user.series = [
+          {
+            name: '新增用户',
+            data: data.userData.map(item => item.new),
+            type: 'bar'
           },
-          grid: {
-            left: "20%",
-          },
-          // 提示框
-          tooltip: {
-            trigger: "axis",
-          },
-          xAxis: {
-            type: "category", // 类目轴
-            data: data.userData.map(item => item.date),
-            axisLine: {
-              lineStyle: {
-                color: "#17b3a3",
-              },
-            },
-            axisLabel: {
-              interval: 0,
-              color: "#333",
-            },
-          },
-          yAxis: [
-            {
-              type: "value",
-              axisLine: {
-                lineStyle: {
-                  color: "#17b3a3",
-                },
-              },
-            },
-          ],
-          color: ["#2ec7c9", "#b6a2de"],
-          series: [
-            {
-              name: '新增用户',
-              data: data.userData.map(item => item.new),
-              type: 'bar'
-            },
-            {
-              name: '活跃用户',
-              data: data.userData.map(item => item.active),
-              type: 'bar'
-              // bar 表示柱状图
-            }
-          ],
-        }
-        const U = echarts.init(this.$refs.userEcharts)
-        U.setOption(userOption)
+          {
+            name: '活跃用户',
+            data: data.userData.map(item => item.active),
+            type: 'bar'
+            // bar 表示柱状图
+          }
+        ]
+        // // 柱状图
+        // const userOption = {
+        //   legend: {
+        //     // 图例文字颜色
+        //     textStyle: {
+        //       color: "#333",
+        //     },
+        //   },
+        //   grid: {
+        //     left: "20%",
+        //   },
+        //   // 提示框
+        //   tooltip: {
+        //     trigger: "axis",
+        //   },
+        //   xAxis: {
+        //     type: "category", // 类目轴
+        //     data: data.userData.map(item => item.date),
+        //     axisLine: {
+        //       lineStyle: {
+        //         color: "#17b3a3",
+        //       },
+        //     },
+        //     axisLabel: {
+        //       interval: 0,
+        //       color: "#333",
+        //     },
+        //   },
+        //   yAxis: [
+        //     {
+        //       type: "value",
+        //       axisLine: {
+        //         lineStyle: {
+        //           color: "#17b3a3",
+        //         },
+        //       },
+        //     },
+        //   ],
+        //   color: ["#2ec7c9", "#b6a2de"],
+        //   series: [
+        //     {
+        //       name: '新增用户',
+        //       data: data.userData.map(item => item.new),
+        //       type: 'bar'
+        //     },
+        //     {
+        //       name: '活跃用户',
+        //       data: data.userData.map(item => item.active),
+        //       type: 'bar'
+        //       // bar 表示柱状图
+        //     }
+        //   ],
+        // }
+        // const U = echarts.init(this.$refs.userEcharts)
+        // U.setOption(userOption)
 
-        // 饼图
-        const videoOption = {
-          tooltip: {
-            trigger: "item",
-          },
-          color: [
-            "#0f78f4",
-            "#dd536b",
-            "#9462e5",
-            "#a6a6a6",
-            "#e1bb22",
-            "#39c362",
-            "#3ed1cf",
-          ],
-          series: [
-            {
-              data: data.videoData,
-              type: 'pie'
-            }
-          ],
-        }
-        const V = echarts.init(this.$refs.videoEcharts)
-        V.setOption(videoOption)
+        this.echartData.video.series = [
+          {
+            data: data.videoData,
+            type: 'pie'
+          }
+        ]
+        // // 饼图
+        // const videoOption = {
+        //   tooltip: {
+        //     trigger: "item",
+        //   },
+        //   color: [
+        //     "#0f78f4",
+        //     "#dd536b",
+        //     "#9462e5",
+        //     "#a6a6a6",
+        //     "#e1bb22",
+        //     "#39c362",
+        //     "#3ed1cf",
+        //   ],
+        //   series: [
+        //     {
+        //       data: data.videoData,
+        //       type: 'pie'
+        //     }
+        //   ],
+        // }
+        // const V = echarts.init(this.$refs.videoEcharts)
+        // V.setOption(videoOption)
 
       } else {
       }
