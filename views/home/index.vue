@@ -25,12 +25,14 @@
         <el-card v-for="item in countData" :key="item.name" :body-style="{display: 'flex', padding: 0}">
           <i class="icon" :class="`el-icon-${item.icon}`" :style="{backgroundColor: item.color}"></i>
           <div class="detail">
-            <p class="num">￥{{item.value}}</p>
-            <p class="txt">{{item.name}}</p>
+            <p class="num">￥{{ item.value }}</p>
+            <p class="txt">{{ item.name }}</p>
           </div>
         </el-card>
       </div>
-      <el-card style="height: 280px"></el-card>
+      <el-card style="height: 280px">
+        <div style="height: 280px" ref="echarts"></div>
+      </el-card>
       <div class="graph">
         <el-card style="height: 260px">
 
@@ -45,6 +47,7 @@
 
 <script>
 import {getData} from "../../api/data"
+import * as echarts from 'echarts'
 
 export default {
   name: 'Home',
@@ -141,6 +144,30 @@ export default {
       const {code, data} = res.data
       if (code === 20000) {
         this.tableData = data.tableData
+        const order = data.orderData
+        const keyArray = Object.keys(order.data[0])
+        const series = []
+        keyArray.forEach(key => {
+          series.push({
+            name: key,
+            data: order.data.map(item => item[key]),
+            type: 'line'
+          })
+        })
+        const option = {
+          xAxis: {
+            data: order.date
+          },
+          yAxis: {},
+          legend: {
+            data: keyArray
+          },
+          series
+        }
+        // 绘制折线图
+        const E = echarts.init(this.$refs.echarts)
+        E.setOption(option)
+
       } else {
       }
       console.log(res)
