@@ -1,4 +1,4 @@
-# vue-management
+# vue-management-demo
 
 ## Project setup
 ```
