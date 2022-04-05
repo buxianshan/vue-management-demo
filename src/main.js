@@ -23,6 +23,7 @@ import {
 import router from '../router'
 import './assets/less/index.less'
 import store from '../store'
+import '../api/mock'
 
 
 Vue.config.productionTip = false

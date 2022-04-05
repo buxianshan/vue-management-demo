@@ -2311,15 +2311,15 @@
   "resolved" "https://registry.npmjs.org/colorette/-/colorette-2.0.16.tgz"
   "version" "2.0.16"
 
+"commander@*", "commander@^7.2.0":
+  "integrity" "sha512-QrWXB+ZQSVPmIWIhtEO9H+gwHaMGYiF5ChvoJ+K9ZGHG/sVsa6yiesAD1GC/x46sET00Xlwo1u49RVVVzvcSkw=="
+  "resolved" "https://registry.npmjs.org/commander/-/commander-7.2.0.tgz"
+  "version" "7.2.0"
+
 "commander@^2.20.0":
   "integrity" "sha512-GpVkmM8vF2vQUkj2LvZmD35JxeJOLCwJ9cUkugyk2nuhbv3+mJvpLYYt+0+USMxE+oj+ey/lJEnhZw75x/OMcQ=="
   "resolved" "https://registry.npmjs.org/commander/-/commander-2.20.3.tgz"
   "version" "2.20.3"
-
-"commander@^7.2.0":
-  "integrity" "sha512-QrWXB+ZQSVPmIWIhtEO9H+gwHaMGYiF5ChvoJ+K9ZGHG/sVsa6yiesAD1GC/x46sET00Xlwo1u49RVVVzvcSkw=="
-  "resolved" "https://registry.npmjs.org/commander/-/commander-7.2.0.tgz"
-  "version" "7.2.0"
 
 "commander@^8.3.0":
   "integrity" "sha512-OkTL9umf+He2DZkUq8f8J9of7yL6RJKI24dVITBmNfZBmri9zYZQrKkuXiKhyfPSu8tUhnVBB1iKXevvnlR4Ww=="
@@ -4283,6 +4283,13 @@
   "version" "0.5.6"
   dependencies:
     "minimist" "^1.2.6"
+
+"mockjs@^1.1.0":
+  "integrity" "sha512-eQsKcWzIaZzEZ07NuEyO4Nw65g0hdWAyurVol1IPl1gahRwY+svqzfgfey8U8dahLwG44d6/RwEzuK52rSa/JQ=="
+  "resolved" "https://registry.npmmirror.com/mockjs/-/mockjs-1.1.0.tgz"
+  "version" "1.1.0"
+  dependencies:
+    "commander" "*"
 
 "module-alias@^2.2.2":
   "integrity" "sha512-A/78XjoX2EmNvppVWEhM2oGk3x4lLxnkEA4jTbaK97QKSDjkIoOsKQlfylt/d3kKKi596Qy3NP5XrXJ6fZIC9Q=="
