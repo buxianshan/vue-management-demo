@@ -1,7 +1,7 @@
 <template>
   <header>
     <div class="left-content">
-      <el-button plain icon="el-icon-menu" size="mini"></el-button>
+      <el-button @click="handleMenu" plain icon="el-icon-menu" size="mini"></el-button>
       <h3 style="color: white">首页</h3>
     </div>
     <div class="right-content">
@@ -24,6 +24,12 @@ export default {
   data() {
     return {
       userIcon: require('../assets/wufan.png')
+    }
+  },
+  methods: {
+    handleMenu() {
+      console.log("ccccc")
+      this.$store.commit('collapseMenu')
     }
   }
 }

@@ -17,6 +17,8 @@ import {
 } from 'element-ui'
 import router from '../router'
 import './assets/less/index.less'
+import store from '../store'
+
 
 Vue.config.productionTip = false
 Vue.use(Button)
@@ -33,6 +35,7 @@ Vue.use(DropdownMenu)
 Vue.use(DropdownItem)
 
 new Vue({
+    store,
     router,
     render: h => h(App),
 }).$mount('#app')

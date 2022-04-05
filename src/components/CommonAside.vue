@@ -2,7 +2,7 @@
   <el-menu default-active="1-4-1" class="el-menu-vertical-demo" background-color="#545c64" text-color="white"
            active-text-color="#ffd04b" @open="handleOpen" @close="handleClose" :collapse="isCollapse">
     <router-link to="/">
-      <h3>Vue后台管理系统</h3>
+      <h3>{{isCollapse ? '后台' : 'Vue后台管理系统'}}</h3>
     </router-link>
     <el-menu-item @click="clickMenu(item)" v-for="item in noChild" :index="item.path" :key="item.path">
       <i :class="`el-icon-${item.icon}`"></i>
@@ -26,7 +26,6 @@
 export default {
   data() {
     return {
-      isCollapse: false,
       menu: [
         {
           path: '/',
@@ -80,6 +79,9 @@ export default {
     hasChild() {
       return this.menu.filter(item => item.children)
     },
+    isCollapse() {
+      return this.$store.state.tab.isCollapse
+    }
   },
   methods: {
     handleOpen(key, keyPath) {
