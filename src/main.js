@@ -22,6 +22,14 @@ import {
     Breadcrumb,
     BreadcrumbItem,
     Tag,
+    Form,
+    FormItem,
+    Input,
+    Select,
+    Option,
+    Switch,
+    DatePicker,
+    Dialog,
 } from 'element-ui'
 import router from '../router'
 import './assets/less/index.less'
@@ -50,6 +58,14 @@ Vue.use(TableColumn)
 Vue.use(Breadcrumb)
 Vue.use(BreadcrumbItem)
 Vue.use(Tag)
+Vue.use(Form)
+Vue.use(FormItem)
+Vue.use(Input)
+Vue.use(Select)
+Vue.use(Option)
+Vue.use(Switch)
+Vue.use(DatePicker)
+Vue.use(Dialog)
 
 new Vue({
     store,

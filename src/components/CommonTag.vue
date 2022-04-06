@@ -9,7 +9,7 @@
         @close="handleClose(tag, index)"
         size="small"
     >
-      {{tag.name}}
+      {{tag.label}}
     </el-tag>
   </div>
 </template>
