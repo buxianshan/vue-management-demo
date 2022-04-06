@@ -21,6 +21,7 @@ import {
     TableColumn,
     Breadcrumb,
     BreadcrumbItem,
+    Tag,
 } from 'element-ui'
 import router from '../router'
 import './assets/less/index.less'
@@ -48,6 +49,7 @@ Vue.use(Table)
 Vue.use(TableColumn)
 Vue.use(Breadcrumb)
 Vue.use(BreadcrumbItem)
+Vue.use(Tag)
 
 new Vue({
     store,
