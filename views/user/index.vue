@@ -195,7 +195,9 @@ export default {
       }).then(() => {
         const id = row.id
         this.$http.get('/user/del', {
-          param: {id}
+          params: {
+            id: id
+          }
         }).then(res => {
           console.log(res)
           this.$message({
