@@ -35,6 +35,7 @@ import router from '../router'
 import './assets/less/index.less'
 import store from '../store'
 import '../api/mock'
+import http from 'axios'
 
 
 Vue.config.productionTip = false
@@ -66,6 +67,8 @@ Vue.use(Option)
 Vue.use(Switch)
 Vue.use(DatePicker)
 Vue.use(Dialog)
+
+Vue.prototype.$http = http
 
 new Vue({
     store,
