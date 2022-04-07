@@ -30,6 +30,9 @@ import {
     Switch,
     DatePicker,
     Dialog,
+    Pagination,
+    MessageBox,
+    Message,
 } from 'element-ui'
 import router from '../router'
 import './assets/less/index.less'
@@ -67,8 +70,11 @@ Vue.use(Option)
 Vue.use(Switch)
 Vue.use(DatePicker)
 Vue.use(Dialog)
+Vue.use(Pagination)
 
 Vue.prototype.$http = http
+Vue.prototype.$confirm = MessageBox.confirm
+Vue.prototype.$message = Message
 
 new Vue({
     store,

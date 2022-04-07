@@ -26,11 +26,23 @@
         <el-button type="primary" @click="getList">搜索</el-button>
       </common-form>
     </div>
+
+    <common-table
+        :table-data="tableData"
+        :table-label="tableLabel"
+        :config="config"
+        @changePage="getList()"
+        @edit="editUser"
+        @del="delUser"
+    ></common-table>
+
   </div>
 </template>
 
 <script>
 import CommonForm from '../../src/components/CommonForm'
+import CommonTable from "../../src/components/CommonTable"
+import {getUser} from "../../api/data"
 
 export default {
   name: 'User',
@@ -92,10 +104,40 @@ export default {
       searchForm: {
         keyword: ''
       },
+      tableData: [],
+      tableLabel: [
+        {
+          prop: 'name',
+          label: '姓名',
+        },
+        {
+          prop: 'age',
+          label: '年龄',
+        },
+        {
+          prop: 'sexLabel',
+          label: '性别',
+        },
+        {
+          prop: 'birth',
+          label: '出生日期',
+          width: 200
+        },
+        {
+          prop: 'addr',
+          label: '地址',
+          width: 320
+        },
+      ],
+      config: {
+        page: 1,
+        total: 30,
+      },
     }
   },
   components: {
     CommonForm,
+    CommonTable,
   },
   methods: {
     confirm() {
@@ -103,11 +145,13 @@ export default {
         this.$http.post('/user/edit', this.operateForm).then(res => {
           console.log(res)
           this.isShow = false
+          this.getList()
         })
       } else {
         this.$http.post('/user/add', this.operateForm).then(res => {
           console.log(res)
           this.isShow = false
+          this.getList()
         })
       }
     },
@@ -122,10 +166,50 @@ export default {
         sex: '',
       }
     },
-    getList() {
-
+    getList(name = '') {
+      this.config.loading = true
+      name ? (this.config.page = 1) : ''
+      getUser({
+        page: this.config.page,
+        name
+      }).then(({data: res}) => {
+        this.tableData = res.list.map(item => {
+          item.sexLabel = item.sex === 0 ? '女' : '男'
+          return item
+        })
+        this.config.total = res.count
+        this.config.loading = true
+      })
+    },
+    editUser(row) {
+      this.isShow = true
+      this.operateType = 'edit'
+      console.log(row)
+      this.operateForm = row
+    },
+    delUser(row) {
+      this.$confirm('此操作将永久删除此组件，是否继续？','提示', {
+        confirmButtonText: "确认",
+        cancelButtonText: "取消",
+        type: "warning",
+      }).then(() => {
+        const id = row.id
+        this.$http.get('/user/del', {
+          param: {id}
+        }).then(res => {
+          console.log(res)
+          this.$message({
+            type: 'success',
+            message: '删除成功'
+          })
+          this.getList()
+        })
+      })
     },
   },
+  created() {
+    this.getList()
+  }
 }
 </script>
 
