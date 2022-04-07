@@ -76,8 +76,26 @@ Vue.prototype.$http = http
 Vue.prototype.$confirm = MessageBox.confirm
 Vue.prototype.$message = Message
 
+// 路由守卫逻辑
+router.beforeEach((to, from, next) => {
+    // store.commit('clearToken')
+    store.commit('getToken')
+    const token = store.state.user.token
+    console.log('@token', token)
+    if (!token && to.name !== 'login') {
+        next({name: 'login'})
+    } else if (token && to.name === 'login') {
+        next({name: 'home'})
+    } else {
+        next()
+    }
+})
+
 new Vue({
     store,
     router,
     render: h => h(App),
+    created() {
+        store.commit('addMenu', router)
+    },
 }).$mount('#app')
