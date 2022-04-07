@@ -194,10 +194,8 @@ export default {
         type: "warning",
       }).then(() => {
         const id = row.id
-        this.$http.get('/user/del', {
-          params: {
-            id: id
-          }
+        this.$http.post('/user/del',{
+          id: id
         }).then(res => {
           console.log(res)
           this.$message({
