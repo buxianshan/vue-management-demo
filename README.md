@@ -1,5 +1,20 @@
 # vue-management-demo
 
+感谢[Allen](https://space.bilibili.com/1643315584)老师的[视频教程](https://www.bilibili.com/video/BV1QU4y1E7qo)。
+
+这是一个 Vue + Element UI 的练习项目。
+
+效果图：
+
+首页
+
+![](./src/assets/images/home_page.png)
+
+用户管理
+
+![](./src/assets/images/user_page.png)
+
+
 ## Project setup
 ```
 yarn install
