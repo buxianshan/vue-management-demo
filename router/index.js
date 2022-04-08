@@ -3,6 +3,13 @@ import VueRouter from 'vue-router'
 
 Vue.use(VueRouter)
 
+// fix: 路由重复时控制台报错
+const originalPush = VueRouter.prototype.push
+VueRouter.prototype.push = function push(location) {
+    // 就是catch一下异常不打印了
+    return originalPush.call(this, location).catch(err => err)
+}
+
 const routes = [
     {
         path: '/',
