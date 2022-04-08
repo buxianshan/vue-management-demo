@@ -7,7 +7,7 @@
 
 # 问题记录
 
-- [ ] 点击触发重复路由时控制台报错：`NavigationDuplicated: Avoided redundant navigation to current location: "/".`
+- [x] 点击触发重复路由时控制台报错：`NavigationDuplicated: Avoided redundant navigation to current location: "/".`
 
 
 
