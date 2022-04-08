@@ -9,6 +9,10 @@
 
 - [x] 点击触发重复路由时控制台报错：`NavigationDuplicated: Avoided redundant navigation to current location: "/".`
 
+- [x] 打开`/`显示主页面显示空，希望应该显示首页的home组件
+
+  解决方法：添加一个默认子路由显示home组件，根路由的name属性要去掉
+
 
 
 # vue-management-demo
