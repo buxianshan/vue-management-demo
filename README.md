@@ -2,7 +2,7 @@
 
 感谢[Allen](https://space.bilibili.com/1643315584)老师的[视频教程](https://www.bilibili.com/video/BV1QU4y1E7qo)。
 
-这是一个 Vue + Element UI 的练习项目。
+这是一个 Vue + Element UI 的练习项目。后续问题解决记录请看[feature](https://github.com/buxianshan/vue-management-demo/tree/feature#readme)分支。
 
 效果图：
 
