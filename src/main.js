@@ -89,6 +89,11 @@ router.beforeEach((to, from, next) => {
     } else if (token && (to.name === 'login' || to.name === 'Main')) {
         next({name: 'home'})
     } else {
+        // 实现访问路由自动激活侧边栏的tab
+        const tabPathList = store.state.tab.tabsList.map(item => item.path)
+        if (tabPathList.indexOf(to.path) !== -1) {
+            store.state.tab.activeIndex = to.path
+        }
         next()
     }
 })
@@ -100,4 +105,8 @@ new Vue({
     created() {
         store.commit('addMenu', router)
     },
+    mounted() {
+        // 首次打开页面时自动激活侧边栏的tab
+        store.state.tab.activeIndex = this.$router.currentRoute.path
+    }
 }).$mount('#app')

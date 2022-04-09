@@ -13,6 +13,7 @@ export default {
         ],
         currentMenu: null,
         menu: [],
+        activeIndex: '/',
     },
     mutations: {
         collapseMenu(state) {

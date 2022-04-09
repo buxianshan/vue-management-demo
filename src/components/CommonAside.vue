@@ -1,5 +1,5 @@
 <template>
-  <el-menu default-active="1-4-1" class="el-menu-vertical-demo" background-color="#545c64" text-color="white"
+  <el-menu :default-active="activeIndex" class="el-menu-vertical-demo" background-color="#545c64" text-color="white"
            active-text-color="#ffd04b" @open="handleOpen" @close="handleClose" :collapse="isCollapse">
     <router-link to="/">
       <h3>{{ isCollapse ? '后台' : 'Vue后台管理系统' }}</h3>
@@ -23,6 +23,8 @@
 </template>
 
 <script>
+import {mapState} from 'vuex'
+
 export default {
   data() {
     return {
@@ -73,6 +75,9 @@ export default {
     };
   },
   computed: {
+    ...mapState({
+      activeIndex: state => state.tab.activeIndex
+    }),
     noChild() {
       console.log(this.syncMenu.filter((item) => !item.children))
       return this.syncMenu.filter((item) => !item.children)
